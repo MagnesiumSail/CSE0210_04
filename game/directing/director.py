@@ -1,3 +1,5 @@
+import random
+
 class Director:
     """A person who directs the game. 
     
@@ -38,8 +40,10 @@ class Director:
             cast (Cast): The cast of actors.
         """
         robot = cast.get_first_actor("robots")
+        
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot.set_velocity(velocity)
+           
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -54,12 +58,20 @@ class Director:
         banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        robot.move_next(max_x, max_y)
+        robot.move_robot_next(max_x)
+        # artifacts.move_next(random.randint(0, max_x), max_y)
         
         for artifact in artifacts:
+            
+            artifact.move_object_down(artifact._position.get_x(), max_y)
+
             if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
+                del artifact
+                print("Deleted")
+               
+               
+                # message = artifact.get_message()
+                # banner.set_text(message)    
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

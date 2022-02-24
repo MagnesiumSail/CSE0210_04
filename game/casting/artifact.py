@@ -29,3 +29,5 @@ class Artifact(Actor):
             message (string): The given message.
         """
         self._message = message
+    
+    
