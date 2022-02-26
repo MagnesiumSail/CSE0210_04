@@ -58,21 +58,14 @@ class Director:
         banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        robot.move_robot_next(max_x)
-        # artifacts.move_next(random.randint(0, max_x), max_y)
+        robot.move_next(max_x)
         
         for artifact in artifacts:
-            
-            artifact.move_object_down(artifact._position.get_x(), max_y)
-
+            # moves gems and rocks down, takes x value, max_y for wrapping, and speed to fall
+            artifact.move_object_down(artifact._position.get_x(), max_y, 3)
             if robot.get_position().equals(artifact.get_position()):
-                del artifact
-                print("Deleted")
+                cast.remove_actor("artifacts", artifact)
                
-               
-                # message = artifact.get_message()
-                # banner.set_text(message)    
-        
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
         

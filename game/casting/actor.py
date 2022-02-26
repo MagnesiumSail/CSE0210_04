@@ -65,7 +65,7 @@ class Actor:
         """
         return self._velocity
     
-    def move_robot_next(self, max_x):
+    def move_next(self, max_x):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
         
@@ -77,9 +77,8 @@ class Actor:
         y = 570
         self._position = Point(x, y)
 
-    def move_object_down(self, x, max_y):
-        x = x
-        y = (self._position.get_y() + self._velocity.get_y()) % max_y + 2
+    def move_object_down(self, x, max_y, speed):
+        y = (self._position.get_y() + self._velocity.get_y()) % max_y + speed
         self._position = Point(x,y)
 
     def set_color(self, color):
