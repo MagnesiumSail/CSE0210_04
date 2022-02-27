@@ -19,6 +19,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._score = 0
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -55,7 +56,7 @@ class Director:
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
 
-        banner.set_text("")
+
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x)
@@ -64,7 +65,9 @@ class Director:
             # moves gems and rocks down, takes x value, max_y for wrapping, and speed to fall
             artifact.move_object_down(artifact._position.get_x(), max_y, 3)
             if robot.get_position().equals(artifact.get_position()):
-                cast.remove_actor("artifacts", artifact)
+                self._score += artifact.get_points()
+                banner.set_text(f'Score: {self._score}')
+                cast.remove_actor("artifacts", artifact) 
                
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

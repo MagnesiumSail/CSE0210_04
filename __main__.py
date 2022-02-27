@@ -34,7 +34,7 @@ def main():
     
     # create the banner
     banner = Actor()
-    banner.set_text("")
+    banner.set_text('Score: 0')
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
@@ -58,9 +58,8 @@ def main():
     #     messages = data.splitlines()
 
     for n in range(DEFAULT_ARTIFACTS):
-        # text = chr(random.randint(33, 126))
         text = random.randint(0,1)
-        # message = messages[n]
+
 
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
@@ -80,7 +79,7 @@ def main():
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
         artifact.set_position(position)
-        # artifact.set_message(message)
+        artifact.set_points()
         cast.add_actor("artifacts", artifact)
     
     # start the game
